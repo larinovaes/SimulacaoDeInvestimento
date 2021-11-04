@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestControllerAdvice
 public class ControllerAdvisor {
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public List<MensagemDeErro> manipularExcecoesDeValidacao(MethodArgumentNotValidException exception) {

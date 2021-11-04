@@ -1,6 +1,7 @@
 package br.com.zup.projetoSimulacao.controller;
 
 import br.com.zup.projetoSimulacao.investidordto.InvestidorDto;
+import br.com.zup.projetoSimulacao.investidordto.RetornoDeInvestimentoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ public class Controller {
 
    @PutMapping
    @ResponseStatus(HttpStatus.CREATED)
-   public void cadastrarInvestidor (@RequestBody @Valid InvestidorDto investidorDto) {
-       servicoInvestimento.cadastrarInvestidor(investidorDto);
+   public RetornoDeInvestimentoDto cadastrarInvestidor (@RequestBody @Valid InvestidorDto investidorDto) {
+       return servicoInvestimento.cadastrarInvestidor(investidorDto);
+
    }
 }

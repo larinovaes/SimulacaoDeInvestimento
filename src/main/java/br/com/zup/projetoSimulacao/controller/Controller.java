@@ -1,9 +1,12 @@
 package br.com.zup.projetoSimulacao.controller;
 
-import br.com.zup.projetoSimulacao.investidordto.Investidor;
+import br.com.zup.projetoSimulacao.investidordto.InvestidorDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,12 +17,13 @@ public class Controller {
    private ServicoInvestimento servicoInvestimento;
 
     @GetMapping
-   public List<Investidor> mostrarInvestidor() {
+   public List<InvestidorDto> mostrarInvestidor() {
        return servicoInvestimento.exibirInvestidor();
    }
 
    @PutMapping
-   public void cadastrarInvestidor (@RequestBody Investidor investidor) {
-        servicoInvestimento.cadastrarInvestidor(investidor);
+   @ResponseStatus(HttpStatus.CREATED)
+   public void cadastrarInvestidor (@RequestBody @Valid InvestidorDto investidorDto) {
+        servicoInvestimento.cadastrarInvestidor(investidorDto);
    }
 }

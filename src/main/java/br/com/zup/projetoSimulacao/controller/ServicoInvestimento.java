@@ -2,6 +2,7 @@ package br.com.zup.projetoSimulacao.controller;
 
 import br.com.zup.projetoSimulacao.investidordto.InvestidorDto;
 import br.com.zup.projetoSimulacao.investidordto.RetornoDeInvestimentoDto;
+import br.com.zup.projetoSimulacao.investidordto.Risco;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,12 +21,11 @@ public class ServicoInvestimento {
         investidores.add(investidorDto);
     }
 
-    public RetornoDeInvestimentoDto calculoDeRendimento(RetornoDeInvestimentoDto retornoDeInvestimentoDto, InvestidorDto investidorDto) {
-        double guardarValor = investidorDto.getRisco().getValor() * investidorDto.getValorInvestido();
-        double valorTotal = guardarValor * investidorDto.getPeriodoDeAplicacaoMeses();
-        valorTotal = retornoDeInvestimentoDto.getValorTotal();
+    public double calculoDeInvestimento(InvestidorDto investidorDto, Risco risco) {
+        double valorDeInvestimento = investidorDto.getPeriodoDeAplicacaoMeses() * risco.getValor();
+        double valorTotal = valorDeInvestimento + investidorDto.getValorInvestido();
 
-        return retornoDeInvestimentoDto;
-
+       return valorTotal;
     }
+
 }

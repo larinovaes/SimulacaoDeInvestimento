@@ -19,7 +19,7 @@ public class ControllerAdvisor {
         List<MensagemDeErro> mensagens = new ArrayList<>();
 
         for (FieldError fieldError: exception.getFieldErrors()) {
-            mensagens.add(new MensagemDeErro(fieldError.getDefaultMessage()));
+            mensagens.add(new MensagemDeErro(fieldError.getDefaultMessage(), fieldError.getField()));
         }
         return mensagens;
     }

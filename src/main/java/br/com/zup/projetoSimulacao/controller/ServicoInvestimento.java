@@ -1,7 +1,6 @@
 package br.com.zup.projetoSimulacao.controller;
 
 import br.com.zup.projetoSimulacao.investidordto.InvestidorDto;
-import br.com.zup.projetoSimulacao.investidordto.RetornoDeInvestimentoDto;
 import br.com.zup.projetoSimulacao.investidordto.Risco;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +26,12 @@ public class ServicoInvestimento {
 
        return valorTotal;
     }
+
+    public void validacaoDeRisco( Risco risco) {
+        if (risco.getValor() < 5000) {
+            throw new RuntimeException();
+        }
+    }
+
 
 }

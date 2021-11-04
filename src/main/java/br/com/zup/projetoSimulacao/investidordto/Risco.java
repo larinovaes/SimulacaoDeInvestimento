@@ -1,9 +1,11 @@
 package br.com.zup.projetoSimulacao.investidordto;
 
 public enum Risco {
-ALTO (0.025), MEDIO(0.015), BAIXO(0.005);
+    ALTO(0.025),
+    MEDIO(0.015),
+    BAIXO(0.005);
 
-private double valor;
+    private double valor;
 
     Risco(double valor) {
         this.valor = valor;

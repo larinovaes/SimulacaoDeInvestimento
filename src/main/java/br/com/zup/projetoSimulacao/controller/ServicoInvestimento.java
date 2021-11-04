@@ -22,10 +22,10 @@ public class ServicoInvestimento {
 
     public RetornoDeInvestimentoDto calculoDeRendimento(RetornoDeInvestimentoDto retornoDeInvestimentoDto, InvestidorDto investidorDto) {
         double guardarValor = investidorDto.getRisco().getValor() * investidorDto.getValorInvestido();
-       double valorTotal = retornoDeInvestimentoDto.getValorTotal();
-       valorTotal = guardarValor * investidorDto.getPeriodoDeAplicacaoMeses();
+        double valorTotal = guardarValor * investidorDto.getPeriodoDeAplicacaoMeses();
+        valorTotal = retornoDeInvestimentoDto.getValorTotal();
 
-       return retornoDeInvestimentoDto;
+        return retornoDeInvestimentoDto;
+
     }
-
 }

@@ -6,7 +6,7 @@ public class Investidor {
     private String cpf;
     private double valorInvestido;
     private int periodoDeAplicacaoMeses;
-    private Risco taxaDeRisco;
+    private Risco risco;
 
     public Investidor(String nome, String email, String cpf, double valorInvestido, int periodoDeAplicacaoMeses, Risco taxaDeRisco) {
         this.nome = nome;
@@ -14,7 +14,7 @@ public class Investidor {
         this.cpf = cpf;
         this.valorInvestido = valorInvestido;
         this.periodoDeAplicacaoMeses = periodoDeAplicacaoMeses;
-        this.taxaDeRisco = taxaDeRisco;
+        this.risco = taxaDeRisco;
     }
 
     public String getNome() {
@@ -57,11 +57,11 @@ public class Investidor {
         this.periodoDeAplicacaoMeses = periodoDeAplicacaoMeses;
     }
 
-    public Risco getTaxaDeRisco() {
-        return taxaDeRisco;
+    public Risco getRisco() {
+        return risco;
     }
 
-    public void setTaxaDeRisco(Risco taxaDeRisco) {
-        this.taxaDeRisco = taxaDeRisco;
+    public void setRisco(Risco risco) {
+        this.risco = risco;
     }
 }

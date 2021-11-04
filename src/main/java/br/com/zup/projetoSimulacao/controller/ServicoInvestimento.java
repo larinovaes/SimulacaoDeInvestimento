@@ -14,7 +14,17 @@ public class ServicoInvestimento {
     public List<Investidor> exibirInvestidor(){
         return investidores;
     }
+
     public void cadastrarInvestidor(Investidor investidor) {
         investidores.add(investidor);
+    }
+
+    public void calcularRetorno() {
+        double valorInvestido = 0;
+        double valorTotalDoLucro = 0;
+        double valorTotal = 0;
+
+
+
     }
 }

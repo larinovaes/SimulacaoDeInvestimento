@@ -2,6 +2,7 @@ package br.com.zup.projetoSimulacao.controller;
 
 import br.com.zup.projetoSimulacao.investidordto.InvestidorDto;
 import br.com.zup.projetoSimulacao.investidordto.Risco;
+import br.com.zup.projetoSimulacao.mensagemdeerro.InvestimentoInvalido;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,20 +18,17 @@ public class ServicoInvestimento {
     }
 
     public void cadastrarInvestidor(InvestidorDto investidorDto) {
+        if (investidorDto.getValorInvestido() < 5000 && investidorDto.getRisco().equals(Risco.ALTO)) {
+            throw new InvestimentoInvalido("Esse valor é invalido para o tipo de risco");
+        }
         investidores.add(investidorDto);
     }
 
-    public double calculoDeInvestimento(InvestidorDto investidorDto, Risco risco) {
+    public double calcularInvestimento(InvestidorDto investidorDto, Risco risco) {
         double valorDeInvestimento = investidorDto.getPeriodoDeAplicacaoMeses() * risco.getValor();
         double valorTotal = valorDeInvestimento + investidorDto.getValorInvestido();
 
        return valorTotal;
-    }
-
-    public void validacaoDeRisco( Risco risco) {
-        if (risco.getValor() < 5000) {
-            throw new RuntimeException();
-        }
     }
 
 

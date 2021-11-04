@@ -1,7 +1,5 @@
 package br.com.zup.projetoSimulacao.mensagemdeerro;
 
-import br.com.zup.projetoSimulacao.investidordto.Risco;
-import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -27,10 +25,10 @@ public class ControllerAdvisor {
         return mensagens;
     }
 
-    @ExceptionHandler(RiscoNaoEncontrado.class)
+    @ExceptionHandler(InvestimentoInvalido.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MensagemDeErro manipluarExcecoes(RiscoNaoEncontrado riscoNaoEncontrado) {
-        return new MensagemDeErro(riscoNaoEncontrado.getMessage(),"risco");
+    public MensagemDeErro manipluarErroInvestimento(InvestimentoInvalido investimentoInvalido) {
+        return new MensagemDeErro("Esse valor é invalido para o tipo de risco","Valor Investido");
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

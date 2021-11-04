@@ -18,8 +18,12 @@ public class Controller {
    private ServicoInvestimento servicoInvestimento;
 
     @GetMapping
-   public List<InvestidorDto> mostrarInvestidor() {
-       return servicoInvestimento.exibirInvestidor();
+    public List<InvestidorDto> exibirInvestidores() {
+        return servicoInvestimento.exibirInvestidor();
+    }
+    @GetMapping("/{nomeDeInvestidor}")
+   public InvestidorDto buscarInvestidor(@PathVariable String nomeDeInvestidor) {
+       return servicoInvestimento.buscarInvestidor(nomeDeInvestidor);
    }
 
    @PutMapping

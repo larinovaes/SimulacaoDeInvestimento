@@ -3,6 +3,7 @@ package br.com.zup.projetoSimulacao.controller;
 import br.com.zup.projetoSimulacao.investidordto.InvestidorDto;
 import br.com.zup.projetoSimulacao.investidordto.RetornoDeInvestimentoDto;
 import br.com.zup.projetoSimulacao.investidordto.Risco;
+import br.com.zup.projetoSimulacao.mensagemdeerro.InvestidorNaoEncontrado;
 import br.com.zup.projetoSimulacao.mensagemdeerro.InvestimentoInvalido;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +27,34 @@ public class ServicoInvestimento {
         retornoDeInvestimentoDto.setValorInvestido(investidorDto.getValorInvestido());
         retornoDeInvestimentoDto.setTotalDoLucuro(calcularLucro(investidorDto));
         retornoDeInvestimentoDto.setValorTotal(calcularValorTotal(investidorDto));
-        investidores.add(investidorDto);
+
         return retornoDeInvestimentoDto;
     }
 
     public double calcularValorTotal(InvestidorDto investidorDto) {
-      return calcularLucro(investidorDto) + investidorDto.getValorInvestido();
+        return calcularLucro(investidorDto) + investidorDto.getValorInvestido();
     }
 
     public double calcularLucro(InvestidorDto investidorDto) {
         return investidorDto.getPeriodoDeAplicacaoMeses() * (investidorDto.getRisco().getValor() * 1);
+    }
+
+    public InvestidorDto buscarInvestidor(String nomeDoInvestidor) {
+
+        for (InvestidorDto investidorDto : investidores) {
+            if (investidorDto.getNome().equalsIgnoreCase(nomeDoInvestidor)) {
+                return investidorDto;
+            }
+        }
+        throw new InvestidorNaoEncontrado("Esse investidor não existe");
+    }
+
+    public void verificarEmailRepetido(InvestidorDto novoinvestidorDto) {
+        for (InvestidorDto investidorDto : investidores) {
+            if (investidorDto.getEmail().equalsIgnoreCase(novoinvestidorDto.getEmail())) {
+                throw new InvestimentoInvalido("Esse email já está cadastrado no sistema");
+            }
+        }
+        investidores.add(novoinvestidorDto);
     }
 }

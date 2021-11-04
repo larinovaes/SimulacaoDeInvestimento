@@ -31,6 +31,16 @@ public class ControllerAdvisor {
     public MensagemDeErro manipluarErroInvestimento(InvestimentoInvalido investimentoInvalido) {
         return new MensagemDeErro("Esse valor é invalido para o tipo de risco","Valor Investido");
     }
+    @ExceptionHandler(InvestidorNaoEncontrado.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MensagemDeErro manipluarErroInvestidorNaoEncontrado(InvestidorNaoEncontrado investidorNaoEncontrado) {
+        return new MensagemDeErro("Esse investidor não existe","Nome de Investidor");
+    }
+    @ExceptionHandler(EmailJaCadastrado.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MensagemDeErro manipluarErroEmailRepetido(EmailJaCadastrado emailJaCadastrado) {
+        return new MensagemDeErro("Esse email já está cadastrado no sistema","Email");
+    }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

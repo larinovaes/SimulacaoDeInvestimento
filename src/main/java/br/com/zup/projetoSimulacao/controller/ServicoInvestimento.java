@@ -35,6 +35,6 @@ public class ServicoInvestimento {
     }
 
     public double calcularLucro(InvestidorDto investidorDto) {
-        return investidorDto.getPeriodoDeAplicacaoMeses() * investidorDto.getRisco().getValor();
+        return investidorDto.getPeriodoDeAplicacaoMeses() * (investidorDto.getRisco().getValor() * 1);
     }
 }

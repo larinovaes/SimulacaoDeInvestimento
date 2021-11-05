@@ -44,13 +44,12 @@ public class ServicoInvestimento {
         throw new InvestidorNaoEncontrado("Esse investidor não existe");
     }
 
-    public InvestidorDto verificarEmailRepetido(InvestidorDto novoinvestidorDto) {
+    public void verificarEmailRepetido(InvestidorDto novoinvestidorDto) {
         for (InvestidorDto investidorDto : investidores) {
             if (investidorDto.getEmail().equalsIgnoreCase(novoinvestidorDto.getEmail())) {
                 throw new InvestimentoInvalido("Esse email já está cadastrado no sistema");
             }
         }
-        return novoinvestidorDto;
     }
 
     public void verificarRisco(InvestidorDto investidorDto) {

@@ -20,15 +20,10 @@ public class ServicoInvestimento {
     }
 
     public RetornoDeInvestimentoDto cadastrarInvestidor(InvestidorDto investidorDto) {
-        if (investidorDto.getValorInvestido() < 5000 && investidorDto.getRisco().equals(Risco.ALTO)) {
-            throw new InvestimentoInvalido("Esse valor é invalido para o tipo de risco");
-        }
-        RetornoDeInvestimentoDto retornoDeInvestimentoDto = new RetornoDeInvestimentoDto();
-        retornoDeInvestimentoDto.setValorInvestido(investidorDto.getValorInvestido());
-        retornoDeInvestimentoDto.setTotalDoLucuro(calcularLucro(investidorDto));
-        retornoDeInvestimentoDto.setValorTotal(calcularValorTotal(investidorDto));
+        verificarEmailRepetido(investidorDto);
+        investidores.add(investidorDto);
+        return verificarRisco(investidorDto);
 
-        return retornoDeInvestimentoDto;
     }
 
     public double calcularValorTotal(InvestidorDto investidorDto) {
@@ -49,12 +44,23 @@ public class ServicoInvestimento {
         throw new InvestidorNaoEncontrado("Esse investidor não existe");
     }
 
-    public void verificarEmailRepetido(InvestidorDto novoinvestidorDto) {
+    public InvestidorDto verificarEmailRepetido(InvestidorDto novoinvestidorDto) {
         for (InvestidorDto investidorDto : investidores) {
             if (investidorDto.getEmail().equalsIgnoreCase(novoinvestidorDto.getEmail())) {
                 throw new InvestimentoInvalido("Esse email já está cadastrado no sistema");
             }
         }
-        investidores.add(novoinvestidorDto);
+        return novoinvestidorDto;
+    }
+
+    public RetornoDeInvestimentoDto verificarRisco(InvestidorDto investidorDto) {
+        if (investidorDto.getValorInvestido() < 5000 && investidorDto.getRisco().equals(Risco.ALTO)) {
+            throw new InvestimentoInvalido("Esse valor é invalido para o tipo de risco");
+        }
+        RetornoDeInvestimentoDto retornoDeInvestimentoDto = new RetornoDeInvestimentoDto();
+        retornoDeInvestimentoDto.setValorInvestido(investidorDto.getValorInvestido());
+        retornoDeInvestimentoDto.setTotalDoLucuro(calcularLucro(investidorDto));
+        retornoDeInvestimentoDto.setValorTotal(calcularValorTotal(investidorDto));
+        return retornoDeInvestimentoDto;
     }
 }

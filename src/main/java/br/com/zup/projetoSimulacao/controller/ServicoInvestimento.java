@@ -21,9 +21,9 @@ public class ServicoInvestimento {
 
     public RetornoDeInvestimentoDto cadastrarInvestidor(InvestidorDto investidorDto) {
         verificarEmailRepetido(investidorDto);
+        verificarRisco(investidorDto);
         investidores.add(investidorDto);
-        return verificarRisco(investidorDto);
-
+        return respostaDoInvestimento(investidorDto);
     }
 
     public double calcularValorTotal(InvestidorDto investidorDto) {
@@ -31,7 +31,7 @@ public class ServicoInvestimento {
     }
 
     public double calcularLucro(InvestidorDto investidorDto) {
-        return investidorDto.getPeriodoDeAplicacaoMeses() * (investidorDto.getRisco().getValor() * 1);
+        return investidorDto.getPeriodoDeAplicacaoMeses() * (investidorDto.getRisco().getValor() * 100);
     }
 
     public InvestidorDto buscarInvestidor(String nomeDoInvestidor) {
@@ -53,14 +53,18 @@ public class ServicoInvestimento {
         return novoinvestidorDto;
     }
 
-    public RetornoDeInvestimentoDto verificarRisco(InvestidorDto investidorDto) {
+    public void verificarRisco(InvestidorDto investidorDto) {
         if (investidorDto.getValorInvestido() < 5000 && investidorDto.getRisco().equals(Risco.ALTO)) {
             throw new InvestimentoInvalido("Esse valor é invalido para o tipo de risco");
         }
+    }
+
+    public RetornoDeInvestimentoDto respostaDoInvestimento(InvestidorDto investidorDto) {
         RetornoDeInvestimentoDto retornoDeInvestimentoDto = new RetornoDeInvestimentoDto();
         retornoDeInvestimentoDto.setValorInvestido(investidorDto.getValorInvestido());
         retornoDeInvestimentoDto.setTotalDoLucuro(calcularLucro(investidorDto));
         retornoDeInvestimentoDto.setValorTotal(calcularValorTotal(investidorDto));
+
         return retornoDeInvestimentoDto;
     }
 }

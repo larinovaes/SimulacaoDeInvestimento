@@ -17,7 +17,6 @@ public class ControllerAdvisor {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public List<MensagemDeErro> manipularExcecoesDeValidacao(MethodArgumentNotValidException exception) {
-
         List<MensagemDeErro> mensagens = new ArrayList<>();
 
         for (FieldError fieldError: exception.getFieldErrors()) {
